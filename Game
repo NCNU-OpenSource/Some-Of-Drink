@@ -1,0 +1,134 @@
+#! /usr/bin/python
+
+import RPi.GPIO as GPIO
+import time
+from fractions import Fraction
+
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(25, GPIO.OUT)
+GPIO.setup(18, GPIO.OUT)
+GPIO.setup(23, GPIO.OUT)
+GPIO.setup(24, GPIO.OUT)
+pwm = GPIO.PWM(18, 100)
+
+def game():
+    #select winner
+    GPIO.output(23, GPIO.HIGH)
+    GPIO.output(24, GPIO.HIGH)
+    winner = ""
+    userA = ""
+    userB = ""
+    while winner == "":
+
+    #user A select weapon
+        while userA == "":
+            print "Turn to player A:"
+            _input = raw_input()
+            if _input == "w":
+                userA = "S"
+                break
+            elif _input == "d":
+                userA = "O"
+                break
+            elif _input == "x":
+                userA = "P"
+                break
+
+    #user B select weapon
+        while userB == "":
+            print "Turn to player B:"
+            _input = raw_input()
+            if _input == "u":
+                userB = "S"
+                break
+            elif _input == "k":
+                userB = "O"
+                break
+            elif _input == "m":
+                userB = "P"
+                break
+
+    #weapon fight
+        if userA == "P" and userB == "S":
+            winner = "userB"
+            break
+        elif userA == "P" and userB == "O":
+            winner = "userA"
+            break
+        elif userA == "O" and userB == "S":
+            winner = "userA"
+            break
+        elif userA == "O" and userB == "P":
+            winner = "userB"
+            break
+        elif userA == "S" and userB == "O":
+            winner = "userB"
+            break
+        elif userA == "S" and userB == "P":
+            winner = "userA"
+            break
+        else:
+            userA = ""
+            userB = ""
+    if winner == "userA":
+        print "Winner is Player A"
+        GPIO.output(23, GPIO.LOW)
+    else:
+        print "Winner is Player B"
+        GPIO.output(24, GPIO.LOW)
+
+    jet(winner)
+
+def jet(winner):
+    pwm.start(13)
+    print "Change your angle with v and b "
+    DesireAngle = 200
+    while winner:
+        control = raw_input()
+        if control == "v":
+            DesireAngle += 20
+            DutyCycle = Fraction(1,18)* (DesireAngle) + 2
+            #print DesireAngle
+            DutyCycle = round(float(DutyCycle),2)
+            #print DutyCycle
+            pwm.ChangeDutyCycle(DutyCycle)
+        elif control == "b":
+            DesireAngle -= 20
+            DutyCycle = Fraction(1,18)* (DesireAngle) + 2
+            DutyCycle = round(float(DutyCycle),2)
+            if DutyCycle < 2:
+                DutyCycle = 2
+            pwm.ChangeDutyCycle(DutyCycle)        
+        else:
+            break
+    if winner == "userA":
+        print "Player A jets water!! press a to jet and s to stop!" 
+    else:
+        print "Player B jets water!! press h to jet and j to stop!"
+    while winner:
+        jet = raw_input()
+        if winner == "userA" and jet == "a":
+            GPIO.output(25, GPIO.HIGH)
+        elif winner == "userA" and jet == "s":
+            GPIO.output(25, GPIO.LOW)
+            break
+        elif winner == "userB" and jet == "h":
+            GPIO.output(25, GPIO.HIGH)
+        elif winner == "userB" and jet == "j":
+            GPIO.output(25, GPIO.LOW)
+            break 
+
+if __name__ == '__main__':
+    try:
+        while True:
+            game()
+    except KeyboardInterrupt:
+        print "exit"
+
+    except: 
+        print "Other error or exception occurred!"
+
+    finally:
+        GPIO.cleanup()
+
