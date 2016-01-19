@@ -8,7 +8,7 @@
 #### Just for fun!!!
 ---
 ## 構想草稿
-* 放圖 
+![pic](https://github.com/NCNU-OpenSource/Some-Of-Drink/blob/master/image/sketch.jpg)
 ---
 ## 實作所需材料（取得來源、價位）
 | 材料名稱            | 數量   | 單價    |總價       |材料來源|
