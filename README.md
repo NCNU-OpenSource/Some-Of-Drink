@@ -34,7 +34,7 @@
 |                    |         |總花費   |NT $1,036  |           ||
 ---
 ## 使用的現有軟體與來源
-* PuTTy : PuTTy官網
+* PuTTy : [PuTTy官網](http://www.chiark.greenend.org.uk/~sgtatham/putty/)
 
 * python-RPi.GPIO
 
