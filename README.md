@@ -84,7 +84,7 @@
 
 * 最終成品
 
-  ![finish](https://github.com/NCNU-OpenSource/Some-Of-Drink/blob/master/image/finush.jpg)
+  ![finish](https://github.com/NCNU-OpenSource/Some-Of-Drink/blob/master/image/finish.jpg)
 
 
 ---
