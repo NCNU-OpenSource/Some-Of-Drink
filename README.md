@@ -5,7 +5,8 @@
 
 * 從「想」到「做」的展現成為影響未來競爭力的關鍵
 
-#### Just for fun!!!
+### Just for fun !!!
+目標 : 做出一個猜拳小遊戲，透過雙方互動，勝利方可以控制水管方向、朝向失敗方的臉噴水。
 ---
 ## 構想草稿
 ![pic](https://github.com/NCNU-OpenSource/Some-Of-Drink/blob/master/image/sketch.jpg)
@@ -42,9 +43,9 @@
 ## 實作過程（碰到哪些問題、如何解決）
 1.  開機時自動啟動Game.py，跑到一半會自動結束：在要使用者輸入時(raw_input)，會發生不明錯誤，疑似是無法讀取stdin
 
-2. 買來的繼電器好像掛掉，浪費很多時間在找測試，最後換一個新的就行了
+2. 買來的繼電器好像掛掉，浪費很多時間在測試，最後換一個新的就行了
 
-3. 花了一點時間學習操作伺服馬達
+3. 花了一點時間學習操作伺服馬達，控制水管方向
 
 ---
 ## 運用與課程內容中相關的技巧
@@ -57,6 +58,34 @@
 
 ---
 ## 組裝過程及製作教學
+* Raspberry pi 接腳示意圖
+
+  ![GPIO](https://github.com/NCNU-OpenSource/Some-Of-Drink/blob/master/image/RaspberryPi-GPIO.png)
+
+* 將12V變壓器接上插座，透過轉接頭，變壓器之正極接到小水沯之正極，變壓器之負極接到繼電器之共用端，則繼電器之常開端接到小水沯之負極，藉此形成一個可控制開關的迴路。將繼電器S端接到Pi之22接腳(控制訊號)，正端接到Pi之4接腳(5V供電)，負端接到Pi之14接腳(接地)。
+
+  ![Model](https://github.com/NCNU-OpenSource/Some-Of-Drink/blob/master/image/model.jpg)
+
+* 將伺服馬達固定於盒子上
+
+  ![motor](https://github.com/NCNU-OpenSource/Some-Of-Drink/blob/master/image/motor.jpg)
+
+* 伺服馬達接線 : 咖啡線接到Pi之6接腳(接地)，紅線Pi之2接腳(5V供電)，橘線接到12接腳(控制訊號)
+
+  ![motor2](https://github.com/NCNU-OpenSource/Some-Of-Drink/blob/master/image/motor2.jpg)
+
+* 利用竹筷固定水管，最後將水管接設伺服馬達
+
+  ![pipe](https://github.com/NCNU-OpenSource/Some-Of-Drink/blob/master/image/pipe.jpg)
+
+* 利用麵包版、LED燈製作勝負判定燈號
+
+  ![light](https://github.com/NCNU-OpenSource/Some-Of-Drink/blob/master/image/light.jpg)
+
+* 最終成品
+
+  ![finish](https://github.com/NCNU-OpenSource/Some-Of-Drink/blob/master/image/finush.jpg)
+
 
 ---
 ## 操作教學
